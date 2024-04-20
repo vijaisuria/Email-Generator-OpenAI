@@ -1,14 +1,19 @@
 import openai
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
 
 class ml_backend:
         
-    openai.api_key = 'API_KEY_HERE'
+    openai.api_key = os.getenv('OPENAI_API_KEY')
 
     def generate_email(self, userPrompt ="Write me a professionally sounding email", start="Dear"):
         """Returns a generated an email using GPT3 with a certain prompt and starting sentence"""
 
         response = openai.Completion.create(
-        engine="gpt-3.5-turbo-0125",
+        engine="gpt-3.5-turbo",
         prompt=userPrompt + "\n\n" + start,
         temperature=0.71,
         max_tokens=150,
